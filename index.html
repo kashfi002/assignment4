@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job | Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <header class="w-[80%] mx-auto mt-[40px]">
+        <h1 class="text-black font-bold text-4xl" >Job Application Tracker</h1>
+        <div class="dashboard grid grid-cols-3 gap-4 mt-5">
+            <div class="total-dash bg-white p-4 shadow-md">
+                <p>Total</p>
+                <p id="total-count" class=" font-bold text-2xl">0</p>
+            </div>
+            <div class="interview-dash  bg-white p-4  shadow-md">
+                <p>Interview</p>
+                <p id="interview-count" class=" text-green-400 font-bold text-2xl">0</p>
+            </div>
+            <div class="rejected-dash  bg-white p-4 shadow-md">
+                <p>Rejected</p>
+                <p id="rejected-count" class=" text-red-600 font-bold text-2xl">0</p>
+            </div>
+        </div>
+    </header>
+    <hr class="w-[80%] mx-auto m-[20px] opacity-5">
+    <main class="w-[80%] mx-auto mt-[40px]">
+        <section class="availability flex justify-between">
+            <p class="font-bold text-2xl">Available Jobs</p>
+            <p><span class="available-count">0</span> Jobs</p>
+        </section>
+        <section class="toggle-bar mt-[20px]">
+            <button id="all-toggle" class=" shadow rounded px-2 py-[5px] mr-[10px] w-[80px] text-center bg-blue-500 text-white">All</button>
+            <button id="interview-toggle" class="shadow rounded px-2 py-[5px] w-[80px] text-center mr-[10px] text-gray-600">Interview</button>
+            <button id="rejected-toggle" class="shadow rounded px-2 py-[5px] w-[80px] text-center text-gray-600">Rejected</button>
+        </section>
+        <section id="section1"class="hidden"></section>
+        <sectionn id="section2"class="hidden"></sectionn>
+        <section id="all-card">
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">Mobile First Corp</p>
+                    <p class="position text-gray-600 mb-[10px]">Software Engineer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+           <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">WebFlow Agency</p>
+                    <p class="position text-gray-600 mb-[10px]">Web Designer & Developer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">DataViz Solutions</p>
+                    <p class="position text-gray-600 mb-[10px]">Data Visualization Specialist</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">CloudFirst Inc</p>
+                    <p class="position text-gray-600 mb-[10px]">Backend Developer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">Innovation Labs</p>
+                    <p class="position text-gray-600 mb-[10px]">UI/UX Engineer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">MegaCorp Solutions</p>
+                    <p class="position text-gray-600 mb-[10px]">JavaScript Developer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">StartupXYZ</p>
+                    <p class="position text-gray-600 mb-[10px]">Full Stack Engineer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+            <div class="flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px]">
+                <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">TechCorp Industries</p>
+                    <p class="position text-gray-600 mb-[10px]">Senior Frontend Developer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-gray-200 w-[113px] text-center py-[5px] rounded-sm">Not Applied</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+
+
+
+
+
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
