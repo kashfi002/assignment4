@@ -6,6 +6,8 @@ const allToggle=document.getElementById("all-toggle");
 const interviewToggle=document.getElementById("interview-toggle");
 const rejectedToggle=document.getElementById("rejected-toggle");
 const AvailableCount=document.getElementsByClassName('available-count')[0];
+const Availability=document.getElementsByClassName('availability')[0];
+
 
 const allCard=document.getElementById("all-card");
 const section1=document.getElementById("section1");
@@ -15,7 +17,7 @@ function calculateCounts(){
     document.getElementById("total-count").innerText =allCard.children.length;
     document.getElementById("interview-count").innerText=interviewList.length;
     document.getElementById("rejected-count").innerText=rejectedList.length;
-    AvailableCount.innerText = allCard.children.length - interviewList.length - rejectedList.length;
+     AvailableCount.innerText=allCard.children.length;
 }
 calculateCounts();
 function TogggleStyle(id){
@@ -39,11 +41,19 @@ function TogggleStyle(id){
         allCard.classList.add("hidden");
         section1.classList.remove("hidden");
         section2.classList.add("hidden");
+        Availability.innerHTML=`
+        <p class="font-bold text-2xl">Available Jobs</p>
+            <p class="available-count">${interviewList.length}<span> of ${allCard.children.length} Jobs</p>
+        `;
     }
     else if(id==="rejected-toggle"){
         allCard.classList.add("hidden");
         section1.classList.add("hidden");
         section2.classList.remove("hidden");
+        Availability.innerHTML=`
+        <p class="font-bold text-2xl">Available Jobs</p>
+            <p class="available-count">${interviewList.length}<span> of ${allCard.children.length} Jobs</p>
+        `;
     }
 
 }
@@ -85,7 +95,7 @@ mainContainer.addEventListener('click', function(event){
         SingleCard.classList.remove("border-l-4", "border-red-400");
         SingleCard.classList.add("border-l-4", "border-green-400");
 
-        if(currentStatus='Rejected'){
+        if(currentStatus=='Rejected'){
             renderRejected();
         }
         renderInterview();
@@ -127,17 +137,30 @@ mainContainer.addEventListener('click', function(event){
         SingleCard.classList.remove("border-l-4", "border-green-400");
         SingleCard.classList.add("border-l-4", "border-red-400");
 
-          if(currentStatus='Interview'){
+          if(currentStatus=='Interview'){
             renderInterview();
         }
         renderRejected();
         calculateCounts();
     }
-     else if(event.target.classList.contains('delete-button')){
-        rejectedList=rejectedList.filter(item => item.CompanyName !== cardInfo.CompanyName);
-         interviewList=interviewList.filter(item => item.CompanyName !== cardInfo.CompanyName);
-     }
+    else if (event.target.closest('.delete-button')) {
 
+    const SingleCard = event.target.closest('.single-card');
+    const CompanyName = SingleCard.querySelector('.company-name').innerText;
+    interviewList = interviewList.filter(
+        item => item.CompanyName !== CompanyName
+    );
+    rejectedList = rejectedList.filter(
+        item => item.CompanyName !== CompanyName
+    );
+    if (SingleCard.parentElement.id === "all-card") {
+        SingleCard.remove();
+    }
+
+    renderInterview();
+    renderRejected();
+    calculateCounts();
+}
 
 function renderInterview(){
     section1.innerHTML=''
