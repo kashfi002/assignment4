@@ -5,6 +5,7 @@ let currentStatus="all";
 const allToggle=document.getElementById("all-toggle");
 const interviewToggle=document.getElementById("interview-toggle");
 const rejectedToggle=document.getElementById("rejected-toggle");
+const AvailableCount=document.getElementsByClassName('available-count')[0];
 
 const allCard=document.getElementById("all-card");
 const section1=document.getElementById("section1");
@@ -14,6 +15,7 @@ function calculateCounts(){
     document.getElementById("total-count").innerText =allCard.children.length;
     document.getElementById("interview-count").innerText=interviewList.length;
     document.getElementById("rejected-count").innerText=rejectedList.length;
+    AvailableCount.innerText = allCard.children.length - interviewList.length - rejectedList.length;
 }
 calculateCounts();
 function TogggleStyle(id){
@@ -82,6 +84,12 @@ mainContainer.addEventListener('click', function(event){
         const SingleCard=event.target.closest('.single-card');
         SingleCard.classList.remove("border-l-4", "border-red-400");
         SingleCard.classList.add("border-l-4", "border-green-400");
+
+        if(currentStatus='Rejected'){
+            renderRejected();
+        }
+        renderInterview();
+        calculateCounts();
     }
 
     else if(event.target.classList.contains('rejected-button')){
@@ -118,8 +126,85 @@ mainContainer.addEventListener('click', function(event){
         const SingleCard=event.target.closest('.single-card');
         SingleCard.classList.remove("border-l-4", "border-green-400");
         SingleCard.classList.add("border-l-4", "border-red-400");
-       
+
+          if(currentStatus='Interview'){
+            renderInterview();
+        }
+        renderRejected();
+        calculateCounts();
+    }
+     else if(event.target.classList.contains('delete-button')){
+        rejectedList=rejectedList.filter(item => item.CompanyName !== cardInfo.CompanyName);
+         interviewList=interviewList.filter(item => item.CompanyName !== cardInfo.CompanyName);
+     }
+
+
+function renderInterview(){
+    section1.innerHTML=''
+    if(interviewList.length==0){
+         section1.innerHTML=`
+       <div class="flex flex-col items-center mt-10">
+            <img src="images/jobs.png" alt="No Interview Jobs" class="mb-4">
+            <p class="text-gray-500 text-lg">No interview jobs yet.</p>
+        </div>
+         `;
+         return
+    }
+     for (let interview of interviewList) {
+        let div = document.createElement('div');
+        div.className ="single-card flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px] border-l-4 border-green-400"
+        div.innerHTML=`
+         <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">${interview.CompanyName}</p>
+                    <p class="position text-gray-600 mb-[10px]">Software Engineer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-white text-green-400 border border-green-400 w-[113px] text-center py-[5px] rounded-sm">${interview.status}</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+        `
+        section1.appendChild(div);
+}
+}
+function renderRejected(){
+    section2.innerHTML=''
+    if(rejectedList.length==0){
+         section2.innerHTML=`
+       <div class="flex flex-col items-center mt-10">
+            <img src="images/jobs.png" alt="No Interview Jobs" class="mb-4">
+            <p class="text-gray-500 text-lg">No interview jobs yet.</p>
+        </div>
+         `;
+         return
+    }
+     for (let reject of rejectedList) {
+        let div = document.createElement('div');
+        div.className ="single-card flex justify-between shadow rounded-2xl p-[20px] space-y-4 mt-[20px] border-l-4 border-red-400"
+        div.innerHTML=`
+         <div >
+                    <p class="company-name text-2xl font-bold mb-[10px]">${reject.CompanyName}</p>
+                    <p class="position text-gray-600 mb-[10px]">Software Engineer</p>
+                    <p class="job-type text-gray-600 mb-[10px]">Remote• Full-time •$130,000 - $175,000</p>
+                    <p class="status mb-[10px] bg-white text-red-400 border border-red-400 w-[113px] text-center py-[5px] rounded-sm">${reject.status}</p>
+                    <p class="note mb-[10px]">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                    <div class="apply-button">
+                        <button class="interview-button border border-green-400 text-green-400 rounded px-[10px]">Interview</button>
+                        <button class="rejected-button border border-red-400 text-red-400 rounded px-[10px]">Rejected</button>
+                    </div>
+                </div>
+                <div>
+                    <button class="delete-button"><i class="fa-regular fa-trash-can"></i></button>
+                </div>
+            </div>
+        `
+        section2.appendChild(div);
+       }
     }
 });
-
-
