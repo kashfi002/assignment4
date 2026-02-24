@@ -68,6 +68,7 @@ function TogggleStyle(id){
 
 const mainContainer = document.querySelector('main');
 mainContainer.addEventListener('click', function(event){
+    //when we click to the interview button
     if(event.target.classList.contains('interview-button')){
         const parentNode = event.target.parentNode.parentNode;
 
@@ -113,6 +114,8 @@ mainContainer.addEventListener('click', function(event){
         calculateCounts();
          
     }
+
+    //when we click to the reject button
 
     else if(event.target.classList.contains('rejected-button')){
         const parentNode = event.target.parentNode.parentNode;
