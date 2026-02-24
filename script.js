@@ -12,6 +12,7 @@ const allCard=document.getElementById("all-card");
 const section1=document.getElementById("section1");
 const section2=document.getElementById("section2");
 
+//counting and update section
 function calculateCounts(){
     document.getElementById("total-count").innerText = allCard.children.length;
     document.getElementById("interview-count").innerText = interviewList.length;
@@ -32,7 +33,8 @@ function calculateCounts(){
         availCount.innerText = `${rejectedList.length} of ${total}`;
     }
 }
-calculateCounts();
+calculateCounts();//calling calculate function
+//toggle section
 function TogggleStyle(id){
     allToggle.classList.remove("bg-blue-500","text-white");
     interviewToggle.classList.remove("bg-blue-500","text-white");
@@ -62,7 +64,7 @@ function TogggleStyle(id){
         section1.classList.add("hidden");
         section2.classList.remove("hidden");
     }
-    calculateCounts(); 
+    calculateCounts(); //calling calculate function
 
 }
 
@@ -106,12 +108,12 @@ mainContainer.addEventListener('click', function(event){
         SingleCard.classList.add("border-l-4", "border-green-400");
 
         if(currentStatus === "rejected-toggle"){
-            renderRejected();
-             calculateCounts();
+            renderRejected(); //calling render function
+             calculateCounts();//calling calculate function
 
         }
-        renderInterview();
-        calculateCounts();
+        renderInterview();//calling render function
+        calculateCounts();//calling calculate function
          
     }
 
@@ -154,11 +156,11 @@ mainContainer.addEventListener('click', function(event){
         SingleCard.classList.add("border-l-4", "border-red-400");
 
           if(currentStatus === "interview-toggle"){
-            renderInterview();
-            calculateCounts();
+            renderInterview(); //calling render function
+            calculateCounts();  //calling count function
         }
-        renderRejected();
-        calculateCounts();
+        renderRejected(); //calling render function
+        calculateCounts(); //calling count function
     }
     else if (event.target.closest('.delete-button')) {
 
