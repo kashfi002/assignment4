@@ -5,7 +5,6 @@ let currentStatus="all";
 const allToggle=document.getElementById("all-toggle");
 const interviewToggle=document.getElementById("interview-toggle");
 const rejectedToggle=document.getElementById("rejected-toggle");
-const AvailableCount=document.getElementsByClassName('available-count')[0];
 const Availability=document.getElementsByClassName('availability')[0];
 
 
@@ -14,10 +13,24 @@ const section1=document.getElementById("section1");
 const section2=document.getElementById("section2");
 
 function calculateCounts(){
-    document.getElementById("total-count").innerText =allCard.children.length;
-    document.getElementById("interview-count").innerText=interviewList.length;
-    document.getElementById("rejected-count").innerText=rejectedList.length;
-     AvailableCount.innerText=allCard.children.length;
+    document.getElementById("total-count").innerText = allCard.children.length;
+    document.getElementById("interview-count").innerText = interviewList.length;
+    document.getElementById("rejected-count").innerText = rejectedList.length;
+
+    const total = allCard.children.length;
+    const availCount = document.getElementById("available-count");
+
+    if (currentStatus === "all-toggle") {
+        availCount.innerText = total;}
+    else if(currentStatus === "all") {
+        availCount.innerText = total;
+    }
+    else if (currentStatus === "interview-toggle") {
+        availCount.innerText = `${interviewList.length} of ${total}`;
+    } 
+    else if (currentStatus === "rejected-toggle") {
+        availCount.innerText = `${rejectedList.length} of ${total}`;
+    }
 }
 calculateCounts();
 function TogggleStyle(id){
@@ -37,24 +50,19 @@ function TogggleStyle(id){
         section1.classList.add("hidden");
         section2.classList.add("hidden");
     }
+    
     else if(id==="interview-toggle"){
         allCard.classList.add("hidden");
         section1.classList.remove("hidden");
         section2.classList.add("hidden");
-        Availability.innerHTML=`
-        <p class="font-bold text-2xl">Available Jobs</p>
-            <p class="available-count">${interviewList.length}<span> of ${allCard.children.length} Jobs</p>
-        `;
+
     }
     else if(id==="rejected-toggle"){
         allCard.classList.add("hidden");
         section1.classList.add("hidden");
         section2.classList.remove("hidden");
-        Availability.innerHTML=`
-        <p class="font-bold text-2xl">Available Jobs</p>
-            <p class="available-count">${interviewList.length}<span> of ${allCard.children.length} Jobs</p>
-        `;
     }
+    calculateCounts(); 
 
 }
 
@@ -90,16 +98,20 @@ mainContainer.addEventListener('click', function(event){
         const updatedStatus= parentNode.querySelector('.status');
         updatedStatus.innerText="Interview";
         updatedStatus.classList.remove("text-gray-600","bg-gray-200");
+        updatedStatus.classList.remove("text-red-400","border","border-red-400");
         updatedStatus.classList.add("text-green-400","border","border-green-400");
         const SingleCard=event.target.closest('.single-card');
         SingleCard.classList.remove("border-l-4", "border-red-400");
         SingleCard.classList.add("border-l-4", "border-green-400");
 
-        if(currentStatus=='Rejected'){
+        if(currentStatus === "rejected-toggle"){
             renderRejected();
+             calculateCounts();
+
         }
         renderInterview();
         calculateCounts();
+         
     }
 
     else if(event.target.classList.contains('rejected-button')){
@@ -132,13 +144,15 @@ mainContainer.addEventListener('click', function(event){
         const updatedStatus= parentNode.querySelector('.status');
         updatedStatus.innerText="Rejected";
         updatedStatus.classList.remove("text-gray-600","bg-gray-200");
+         updatedStatus.classList.remove("text-green-400","border","border-green-400");
         updatedStatus.classList.add("text-red-400","border","border-red-400");
         const SingleCard=event.target.closest('.single-card');
         SingleCard.classList.remove("border-l-4", "border-green-400");
         SingleCard.classList.add("border-l-4", "border-red-400");
 
-          if(currentStatus=='Interview'){
+          if(currentStatus === "interview-toggle"){
             renderInterview();
+            calculateCounts();
         }
         renderRejected();
         calculateCounts();
